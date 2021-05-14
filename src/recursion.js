@@ -74,13 +74,14 @@ var isEven = function(n) {
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+
   if (n === 0) {
     return n;
   }
 
   if (n > 0) {
-    var result = 0;
 
+    var result = 0;
     var counter = function(x) {
       result += x - 1;
       return result;
@@ -92,8 +93,6 @@ var sumBelow = function(n) {
   } else if (n < 0) {
 
     var result = 0;
-
-
     var counter = function(x) {
       result += x + 1;
       return result;
@@ -112,14 +111,11 @@ var range = function(x, y) {
   var result = [];
 
   // push all numbers between x and y into an array
-  // while (x < y) {
-  //   var num = x + 1;
-  //   result.push(num)
-  //   range(num, y);
 
-  console.log(result);
+
+
   // call the function again
-  // return result;
+  return result;
   // return the final result array
 
 
