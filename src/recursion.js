@@ -107,6 +107,22 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+
+  // store all numbers being pushed
+  var result = [];
+
+  // push all numbers between x and y into an array
+  // while (x < y) {
+  //   var num = x + 1;
+  //   result.push(num)
+  //   range(num, y);
+
+  console.log(result);
+  // call the function again
+  // return result;
+  // return the final result array
+
+
 };
 
 // 7. Compute the exponent of a number.
