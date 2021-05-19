@@ -31,9 +31,7 @@ var sum = function(array) {
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
 
-  if (array.length === 0) {
-    return 0;
-  }
+
   var result = 0;
   if (!Array.isArray(array)) {
     result += array;
@@ -82,7 +80,8 @@ var sumBelow = function(n) {
 
   return (n - 1) + sumBelow(n - 1);
 
-  } else if (n < 0) {
+  }
+  if (n < 0) {
 
     // var result = 0;
     // var counter = function(x) {
@@ -102,16 +101,17 @@ var range = function(x, y) {
   // identify smallest piece of data that my function needs to handle
 
   var result = [];
+  if (x === y || x === y -1) {
+    return [];
+  }
   if (x < y) {
-    result.push(x);
+    // push all numbers between x and y into and array
+    result.push(x + 1);
   }
 
 
-
-  // push all numbers between x and y into and array
-
-  // return result array
-
+  // return result array plus each array in new EC
+  return result.concat(range(x + 1, y))
 };
 
 // 7. Compute the exponent of a number.
@@ -120,6 +120,14 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  if (exp === 0) {
+    return 1;
+  }
+  if (exp < 0) {
+    return 1 / (base * exponent(base, exp * - 1));
+  }
+
+  return base * exponent(base, exp - 1);
 };
 
 // 8. Determine if a number is a power of two.
@@ -127,23 +135,61 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  // input is a number
+  // output is a boolean
+
+  // 1 is the only odd power of 2
+  if (n === 1) {
+    return true;
+  }
+  // all other odds are not powers of 2
+  if (n % 2 !== 0 ) {
+    return false;
+  }
+  if (n === 0) {
+    return false;
+  }
+
+// recursive function call
+return powerOfTwo(n / 2);
 
 };
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
 
-  if (string === '') {
-    return string;
+  if (string.length === 0) {
+    return '';
   }
-  var result = '';
 
-  return result += reverse(string.slice(0, string.length -1));
+  return string.slice(-1) + reverse(string.slice(0, -1))
 
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  // input is a string
+  // output is a boolean
+
+  /* this is too iterative, not recursive
+  // if input string does not match reversed string, then false
+  // if input string DOES match reversed string, then true */
+
+
+  // edge case
+
+  if (string[0] !== string[string.length -1]) {
+    return false;
+  }
+
+  //base case
+  if (string.length === 1 || string.length === 0) {
+    return true;
+  }
+
+  return palindrome(string.slice(1, -1));
+
+
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -218,6 +264,23 @@ var rMap = function(array, callback) {
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
 var countKeysInObj = function(obj, key) {
+
+
+  var count = 0;
+
+
+    if (obj[key] !== undefined) {
+      count++;
+  }
+    if (typeof obj === 'object') {
+      for (var prop in obj) {
+        count += countKeysInObj(obj[prop], key)
+    }
+  }
+
+  return count;
+
+
 };
 
 // 23. Write a function that counts the number of times a value occurs in an object.
@@ -225,6 +288,8 @@ var countKeysInObj = function(obj, key) {
 // countValuesInObj(obj, 'r') // 2
 // countValuesInObj(obj, 'e') // 1
 var countValuesInObj = function(obj, value) {
+
+  // console.log(obj['t'][value])
 };
 
 // 24. Find all keys in an object (and nested objects) by a provided name and rename
